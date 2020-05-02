@@ -12,7 +12,8 @@ interface Options {
 }
 
 export async function optimize(options?: Partial<Options>) {
-  const { yarnLockPath, check } = { yarnLockPath: 'yarn.lock', check: false, ...options }
+  const yarnLockPath = options?.yarnLockPath || 'yarn.lock'
+  const check = options?.check
   
   const raw = await readFileAsync(yarnLockPath)
   const json = (lockfile.parse(raw.toString()) as { object: { [name: string]: Result } }).object

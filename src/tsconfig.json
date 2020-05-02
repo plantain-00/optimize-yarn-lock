@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "../dist",
     "module": "commonjs",
-    "declaration": true
+    "declaration": true,
+    "target": "ES2018"
   }
 }
