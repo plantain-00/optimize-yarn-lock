@@ -43,4 +43,14 @@ tmp@^0.0.33:
   dependencies:
     os-tmpdir "~1.0.2"
 
+uuid@3.3.2, uuid@^3.3.2:
+  version "3.3.2"
+  resolved "https://registry.npm.taobao.org/uuid/download/uuid-3.3.2.tgz#1b4af4955eb3077c501c23872fc6513811587131"
+  integrity sha1-G0r0lV6zB3xQHCOHL8ZROBFYcTE=
+
+uuid@^8.0.0:
+  version "8.0.0"
+  resolved "https://registry.npm.taobao.org/uuid/download/uuid-8.0.0.tgz#bc6ccf91b5ff0ac07bbcdbf1c7c4e150db4dbb6c"
+  integrity sha1-vGzPkbX/CsB7vNvxx8ThUNtNu2w=
+
 optimize-yarn-lock success.

@@ -2,6 +2,7 @@ import * as fs from 'fs'
 import * as util from 'util'
 import * as lockfile from '@yarnpkg/lockfile'
 import * as semver from 'semver'
+import * as url from 'url'
 
 const readFileAsync = util.promisify(fs.readFile)
 const writeFileAsync = util.promisify(fs.writeFile)
@@ -35,17 +36,33 @@ export async function optimize(options?: Partial<Options>) {
   }
 
   for (const [key, array] of map.entries()) {
+    for (const item of array) {
+      cleanResolved(item.result)
+    }
     if (array.length <= 1) {
       continue
     }
     const versions = new Set<Result>()
+    const fixedVersions = new Set<string>()
     for (const item of array) {
+      const cleanedVersion = semver.clean(item.version)
+      if (cleanedVersion && semver.valid(cleanedVersion)) {
+        fixedVersions.add(cleanedVersion)
+      }
       versions.add(item.result)
     }
     if (versions.size <= 1) {
       continue
     }
-    const sortedVersion = Array.from(versions).sort((a, b) => semver.compare(b.version, a.version))
+    const sortedVersion = Array.from(versions).sort((a, b) => {
+      if (fixedVersions.has(b.version)) {
+        return 1
+      }
+      if (fixedVersions.has(a.version)) {
+        return -1
+      }
+      return semver.compare(b.version, a.version)
+    })
     for (const version of sortedVersion) {
       if (array.length === 0) {
         break
@@ -67,6 +84,14 @@ export async function optimize(options?: Partial<Options>) {
     console.info(result)
   } else {
     await writeFileAsync(yarnLockPath, result)
+  }
+}
+
+function cleanResolved(version: Result) {
+  const u = url.parse(version.resolved)
+  if (u.search) {
+    u.search = null
+    version.resolved = url.format(u)
   }
 }
 
