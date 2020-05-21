@@ -68,3 +68,13 @@ uuid@^8.0.0:
   version "8.0.0"
   resolved "https://registry.npm.taobao.org/uuid/download/uuid-8.0.0.tgz?cache=0&sync_timestamp=1588192989289&other_urls=https%3A%2F%2Fregistry.npm.taobao.org%2Fuuid%2Fdownload%2Fuuid-8.0.0.tgz#bc6ccf91b5ff0ac07bbcdbf1c7c4e150db4dbb6c"
   integrity sha1-vGzPkbX/CsB7vNvxx8ThUNtNu2w=
+
+inherits@2, inherits@2.0.1, inherits@^2.0.1, inherits@~2.0.1:
+  version "2.0.1"
+  resolved "https://registry.npm.taobao.org/inherits/download/inherits-2.0.1.tgz#b17d08d326b4423e568eff719f91b0b1cbdf69f1"
+  integrity sha1-sX0I0ya0Qj5Wjv9xn5GwscvfafE=
+
+inherits@2.0.3, inherits@^2.0.3, inherits@~2.0.3:
+  version "2.0.3"
+  resolved "https://registry.npm.taobao.org/inherits/download/inherits-2.0.3.tgz#633c2c83e3da42a502f52466022480f4208261de"
+  integrity sha1-Yzwsg+PaQqUC9SRmAiSA9CCCYd4=

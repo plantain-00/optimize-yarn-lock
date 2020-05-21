@@ -55,10 +55,12 @@ export async function optimize(options?: Partial<Options>) {
       continue
     }
     const sortedVersion = Array.from(versions).sort((a, b) => {
-      if (fixedVersions.has(b.version)) {
+      const aIsFixed = fixedVersions.has(a.version)
+      const bIsFixed = fixedVersions.has(b.version)
+      if (bIsFixed && !aIsFixed) {
         return 1
       }
-      if (fixedVersions.has(a.version)) {
+      if (aIsFixed && !bIsFixed) {
         return -1
       }
       return semver.compare(b.version, a.version)
