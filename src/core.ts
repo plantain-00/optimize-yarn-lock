@@ -12,13 +12,10 @@ interface Options {
   check: boolean
 }
 
-export async function optimize(options?: Partial<Options>) {
-  const yarnLockPath = options?.yarnLockPath || 'yarn.lock'
-  const check = options?.check
-  
-  const raw = await readFileAsync(yarnLockPath)
-  const json = (lockfile.parse(raw.toString()) as { object: { [name: string]: Result } }).object
-
+function optimizeByOrder(
+  json: { [name: string]: Result },
+  compareFn: (a: Result, b: Result, fixedVersions: Set<string>) => number,
+) {
   const map = new Map<string, Array<{ version: string, result: Result }>>()
   for (const key in json) {
     const index = key.lastIndexOf('@')
@@ -54,17 +51,7 @@ export async function optimize(options?: Partial<Options>) {
     if (versions.size <= 1) {
       continue
     }
-    const sortedVersion = Array.from(versions).sort((a, b) => {
-      const aIsFixed = fixedVersions.has(a.version)
-      const bIsFixed = fixedVersions.has(b.version)
-      if (bIsFixed && !aIsFixed) {
-        return 1
-      }
-      if (aIsFixed && !bIsFixed) {
-        return -1
-      }
-      return semver.compare(b.version, a.version)
-    })
+    const sortedVersion = Array.from(versions).sort((a, b) => compareFn(a, b, fixedVersions))
     for (const version of sortedVersion) {
       if (array.length === 0) {
         break
@@ -80,6 +67,28 @@ export async function optimize(options?: Partial<Options>) {
       }
     }
   }
+}
+
+export async function optimize(options?: Partial<Options>) {
+  const yarnLockPath = options?.yarnLockPath || 'yarn.lock'
+  const check = options?.check
+  
+  const raw = await readFileAsync(yarnLockPath)
+  const json = (lockfile.parse(raw.toString()) as { object: { [name: string]: Result } }).object
+
+  optimizeByOrder(json, (a, b, fixedVersions) => {
+    const aIsFixed = fixedVersions.has(a.version)
+    const bIsFixed = fixedVersions.has(b.version)
+    if (bIsFixed && !aIsFixed) {
+      return 1
+    }
+    if (aIsFixed && !bIsFixed) {
+      return -1
+    }
+    return semver.compare(b.version, a.version)
+  })
+
+  optimizeByOrder(json, (a, b) => semver.compare(b.version, a.version))
 
   const result = lockfile.stringify(json)
   if (check) {
