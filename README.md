@@ -51,3 +51,12 @@ becomes:
 ## usage
 
 run `optimize-yarn-lock`
+
+## options
+
+key | description
+--- | ---
+-h,--help | Print this message.
+-v,--version | Print the version
+-p | yarn lock dir path
+--check | only check
