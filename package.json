@@ -1,6 +1,6 @@
 {
   "name": "optimize-yarn-lock",
-  "version": "1.4.1",
+  "version": "1.5.0",
   "description": "A CLI to optimize yarn.lock",
   "main": "dist/core.js",
   "types": "dist/core.d.ts",
