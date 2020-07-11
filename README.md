@@ -60,3 +60,11 @@ key | description
 -v,--version | Print the version
 -p | yarn lock dir path
 --check | only check
+
+## API
+
+```ts
+import { optimize } from 'optimize-yarn-lock'
+
+await optimize({ yarnLockPath: './yarn.lock' })
+```

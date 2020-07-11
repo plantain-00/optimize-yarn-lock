@@ -2,7 +2,8 @@
   "name": "optimize-yarn-lock",
   "version": "1.4.1",
   "description": "A CLI to optimize yarn.lock",
-  "main": "index.js",
+  "main": "dist/core.js",
+  "types": "dist/core.d.ts",
   "dependencies": {
     "@yarnpkg/lockfile": "1",
     "minimist": "1",
