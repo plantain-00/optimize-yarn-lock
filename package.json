@@ -52,5 +52,8 @@
   },
   "typeCoverage": {
     "atLeast": 99.34
+  },
+  "publishConfig": {
+    "registry": "https://registry.npmjs.org/"
   }
 }
