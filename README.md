@@ -4,7 +4,6 @@ A CLI to optimize yarn.lock
 
 [![Dependency Status](https://david-dm.org/plantain-00/optimize-yarn-lock.svg)](https://david-dm.org/plantain-00/optimize-yarn-lock)
 [![devDependency Status](https://david-dm.org/plantain-00/optimize-yarn-lock/dev-status.svg)](https://david-dm.org/plantain-00/optimize-yarn-lock#info=devDependencies)
-[![Build Status: Linux](https://travis-ci.org/plantain-00/optimize-yarn-lock.svg?branch=master)](https://travis-ci.org/plantain-00/optimize-yarn-lock)
 [![Build Status: Windows](https://ci.appveyor.com/api/projects/status/github/plantain-00/optimize-yarn-lock?branch=master&svg=true)](https://ci.appveyor.com/project/plantain-00/optimize-yarn-lock/branch/master)
 ![Github CI](https://github.com/plantain-00/optimize-yarn-lock/workflows/Github%20CI/badge.svg)
 [![npm version](https://badge.fury.io/js/optimize-yarn-lock.svg)](https://badge.fury.io/js/optimize-yarn-lock)
