@@ -28,7 +28,7 @@ function optimizeByOrder(
     }
     array.push({
       version,
-      result: json[key],
+      result: json[key]!,
     })
   }
 
@@ -62,7 +62,7 @@ function optimizeByOrder(
         break
       }
       for (let i = array.length - 1; i >= 0; i--) {
-        const item = array[i]
+        const item = array[i]!
         if (item.result === version) {
           array.splice(i, 1)
         } else if (semver.satisfies(version.version, item.version)) {
